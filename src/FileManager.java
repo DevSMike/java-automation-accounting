@@ -19,7 +19,9 @@ public class FileManager {
     }
     static boolean isCanReadYearFile(String path, YearlyReport yearlyReport) {
         String yearFile = readFileContentsOrNull(path);
-        if (yearFile != null) {
+        if (yearFile == null) {
+            return false;
+        } else {
             String[] lines = yearFile.split("\\n");
             for (int i = 1; i < lines.length; i++) {
                 String[] items = lines[i].split(",");
@@ -27,15 +29,17 @@ public class FileManager {
                 yearlyReport.itemsFromFile.add(item);
             }
             return true;
-        } else return false;
+        }
     }
 
     static boolean isCanReadMonthFromFiles(ArrayList<MonthlyReport> monthlyReports) {
         String[] monthFiles = new String[3];
-        boolean isFilesInPath = true;
         for (int i = 0; i < 3; i++) {
             monthFiles[i] = readFileContentsOrNull("resources/m.20210" + (i+1)+".csv");
-            if (monthFiles[i] != null) {
+            if (monthFiles[i] == null) {
+                System.out.println("Не удалось прочитать файл m.20210" + (i + 1) + ".csv");
+                return false;
+            } else {
                 String[] lines = monthFiles[i].split("\\n");
                 MonthlyReport monthlyReport = new MonthlyReport(i+1);
                 for (int j = 1; j < lines.length; j++) {
@@ -44,8 +48,8 @@ public class FileManager {
                     monthlyReport.itemsFromFile.add(item);
                 }
                 monthlyReports.add(monthlyReport);
-            } else isFilesInPath = false;
+            }
         }
-        return isFilesInPath;
+        return true;
     }
 }
