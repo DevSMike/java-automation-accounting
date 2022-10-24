@@ -15,13 +15,17 @@ public class Main {
             printMenu();
             command = scanner.nextInt();
             if (command == 1) {
-                FileManager.readingMonthFromFiles(monthlyReports);
-                isMonthsReed = true;
+                if (FileManager.isCanReadMonthFromFiles(monthlyReports)) {
+                    System.out.println("Считывание месячных отчётов прошло успешно!");
+                    isMonthsReed = true;
+                } else System.out.println("При считывании месячных отчетов произошла ошибка. Возможно файлов нет в указанной дирректории.");
             } else if (command == 2) {
                 String path = "resources/y.2021.csv";
-                FileManager.readingYearFile(path, yearlyReport);
-                FileManager.setYearFormPath(path,yearlyReport);
-                isYearReed = true;
+               if (FileManager.isCanReadYearFile(path, yearlyReport)) {
+                   System.out.println("Считывание годового отчёта прошло успешно!");
+                   FileManager.setYearFormPath(path,yearlyReport);
+                   isYearReed = true;
+               } else System.out.println("При считывании файла произошла ошибка. Возможно его нет в указанной дирректории.");
             } else if (command == 3) {
                 if (isMonthsReed && isYearReed) ReportBase.printCheckingData(monthlyReports,yearlyReport);
                     else System.out.println("Не все файлы прочитаны!");
