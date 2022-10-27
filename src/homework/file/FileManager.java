@@ -1,3 +1,6 @@
+package homework.file;
+
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,15 +16,13 @@ public class FileManager {
             return null;
         }
     }
-    static void setYearFormPath(String path, YearlyReport yearlyReport) {
+    public static void setYearFormPath(String path, YearlyReport yearlyReport) {
         String[] partsOfPath = path.split("\\.");
         yearlyReport.year = Integer.parseInt(partsOfPath[1]);
     }
-    static boolean isCanReadYearFile(String path, YearlyReport yearlyReport) {
+    public static boolean isCanReadYearFile(String path, YearlyReport yearlyReport) {
         String yearFile = readFileContentsOrNull(path);
-        if (yearFile == null) {
-            return false;
-        } else {
+        if (yearFile == null) {return false; }
             String[] lines = yearFile.split("\\n");
             for (int i = 1; i < lines.length; i++) {
                 String[] items = lines[i].split(",");
@@ -30,16 +31,15 @@ public class FileManager {
             }
             return true;
         }
-    }
 
-    static boolean isCanReadMonthFromFiles(ArrayList<MonthlyReport> monthlyReports) {
+    public static boolean isCanReadMonthFromFiles(ArrayList<MonthlyReport> monthlyReports) {
         String[] monthFiles = new String[3];
         for (int i = 0; i < 3; i++) {
             monthFiles[i] = readFileContentsOrNull("resources/m.20210" + (i+1)+".csv");
             if (monthFiles[i] == null) {
                 System.out.println("Не удалось прочитать файл m.20210" + (i + 1) + ".csv");
                 return false;
-            } else {
+            }
                 String[] lines = monthFiles[i].split("\\n");
                 MonthlyReport monthlyReport = new MonthlyReport(i+1);
                 for (int j = 1; j < lines.length; j++) {
@@ -49,7 +49,6 @@ public class FileManager {
                 }
                 monthlyReports.add(monthlyReport);
             }
-        }
         return true;
     }
 }

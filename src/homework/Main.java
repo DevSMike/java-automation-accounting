@@ -1,3 +1,9 @@
+package homework;
+
+import homework.file.FileManager;
+import homework.file.MonthlyReport;
+import homework.file.YearlyReport;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 

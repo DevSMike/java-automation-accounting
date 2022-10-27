@@ -1,3 +1,5 @@
+package homework.file;
+
 import java.util.ArrayList;
 
 public class MonthlyReport {
@@ -10,7 +12,18 @@ public class MonthlyReport {
     int maxExpense = 0;
 
     int month;
-
+    public String getNameOfTheMaxSumItem(){
+        return nameOfTheMaxSumItem;
+    }
+    public String getNameOfTheMaxExpense() {
+        return nameOfTheMaxExpense;
+    }
+    public int getMaxSum() {
+        return maxSum;
+    }
+    public int getMaxExpense() {
+        return maxExpense;
+    }
     public MonthlyReport (int month) {
         this.month = month;
 

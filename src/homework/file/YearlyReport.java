@@ -1,3 +1,5 @@
+package homework.file;
+
 import java.util.ArrayList;
 
 public class YearlyReport {
@@ -5,7 +7,9 @@ public class YearlyReport {
 
     int year;
     private final int monthCount = 3;
-
+    public int getYear(){
+        return year;
+    }
     public static String getMonthName(int month) {
         if (month == 1) return "Январь";
         else if (month == 2) return "Февраль";
